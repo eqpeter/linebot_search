@@ -84,25 +84,52 @@ git clone https://github.com/您的使用者名稱/linebot_search.git
 cd linebot_search
 ```
 
-3. 在 PythonAnywhere 建立虛擬環境：
+3. 在 PythonAnywhere 建立虛擬環境（使用 Python 3.9 或更高版本）：
 ```bash
-mkvirtualenv --python=/usr/bin/python3.8 linebot_env
-pip install -r requirements.txt
+# 檢查可用的 Python 版本
+ls /usr/bin/python*
+
+# 建立虛擬環境（使用 Python 3.9 或更高版本）
+mkvirtualenv --python=/usr/bin/python3.9 linebot_env
+
+# 如果上述命令失敗，可以嘗試：
+python3.9 -m venv linebot_env
+source linebot_env/bin/activate
+
+# 升級 pip
+pip install --upgrade pip
+
+# 安裝套件（如果遇到錯誤，可以一個一個安裝）
+pip install flask
+pip install line-bot-sdk
+pip install python-dotenv
+pip install google-generativeai
+pip install googlesearch-python
+pip install aiohttp
 ```
 
-4. 設定 Web 應用：
+4. 如果仍然無法安裝 google-generativeai，可以嘗試：
+```bash
+# 指定較早的穩定版本
+pip install google-generativeai==0.3.1
+
+# 或者從 GitHub 安裝最新版本
+pip install git+https://github.com/google/generative-ai-python.git
+```
+
+5. 設定 Web 應用：
    - 前往 Web 頁面
    - 點擊 Add a new web app
    - 選擇 Manual configuration
    - 選擇 Python 3.8
 
-5. 設定虛擬環境路徑：
+6. 設定虛擬環境路徑：
    - 在 Virtualenv 區域輸入：
    ```
    /home/<your-username>/.virtualenvs/linebot_env
    ```
 
-6. 修改 WSGI 設定檔：
+7. 修改 WSGI 設定檔：
 ```python
 import os
 import sys
@@ -121,14 +148,14 @@ os.environ['LINE_CHANNEL_ACCESS_TOKEN'] = 'your_token_here'
 from main import app as application
 ```
 
-7. 更新 LINE Bot Webhook URL：
+8. 更新 LINE Bot Webhook URL：
    - 前往 LINE Developers Console
    - 更新 Webhook URL 為：
    ```
    https://<your-username>.pythonanywhere.com/callback
    ```
 
-8. 重新載入 Web 應用
+9. 重新載入 Web 應用
 
 ## 注意事項
 
