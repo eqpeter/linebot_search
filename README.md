@@ -76,36 +76,28 @@ git push -u origin main
 
 ## PythonAnywhere 部署步驟
 
-1. 註冊/登入 [PythonAnywhere](https://www.pythonanywhere.com/)
-
-2. 開啟 Bash console，克隆專案：
+1. 在 Bash Console 中管理虛擬環境：
 ```bash
-git clone https://github.com/您的使用者名稱/linebot_search.git
-cd linebot_search
+# 列出現有虛擬環境
+lsvirtualenv
+
+# 如需刪除舊環境
+rmvirtualenv linebot_env
 ```
 
-3. 在 PythonAnywhere 建立虛擬環境（使用 Python 3.9 或更高版本）：
+2. 建立新的 Python 3.12 虛擬環境：
 ```bash
-# 檢查可用的 Python 版本
-ls /usr/bin/python*
+# 建立虛擬環境
+mkvirtualenv --python=/usr/bin/python3.12 linebot_env
 
-# 建立虛擬環境（使用 Python 3.9 或更高版本）
-mkvirtualenv --python=/usr/bin/python3.9 linebot_env
+# 啟動虛擬環境（如果沒有自動啟動）
+workon linebot_env
+```
 
-# 如果上述命令失敗，可以嘗試：
-python3.9 -m venv linebot_env
-source linebot_env/bin/activate
-
-# 升級 pip
+3. 安裝必要套件：
+```bash
 pip install --upgrade pip
-
-# 安裝套件（如果遇到錯誤，可以一個一個安裝）
-pip install flask
-pip install line-bot-sdk
-pip install python-dotenv
-pip install google-generativeai
-pip install googlesearch-python
-pip install aiohttp
+pip install -r requirements.txt
 ```
 
 4. 如果仍然無法安裝 google-generativeai，可以嘗試：
@@ -121,7 +113,7 @@ pip install git+https://github.com/google/generative-ai-python.git
    - 前往 Web 頁面
    - 點擊 Add a new web app
    - 選擇 Manual configuration
-   - 選擇 Python 3.8
+   - 選擇 Python 3.12
 
 6. 設定虛擬環境路徑：
    - 在 Virtualenv 區域輸入：
