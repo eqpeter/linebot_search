@@ -16,6 +16,7 @@
 - Flask
 - LINE Messaging API SDK
 - Google Generative AI SDK
+- googlesearch-python   # 用於網路搜尋第三方套件
 - 其他相依套件請見 requirements.txt
 
 ## 本地安裝與測試
@@ -132,9 +133,7 @@ if path not in sys.path:
     sys.path.append(path)
 
 # 設定環境變數
-os.environ['GOOGLE_API_KEY'] = 'your_key_here'
-os.environ['LINE_CHANNEL_SECRET'] = 'your_secret_here'
-os.environ['LINE_CHANNEL_ACCESS_TOKEN'] = 'your_token_here'
+WSGI.py 設定檔
 
 # 匯入 Flask 應用
 from main import app as application
